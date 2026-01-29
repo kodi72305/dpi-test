@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT
+
+description: Behavior that adjusts the CPI/DPI of a pointing sensor.
+
+compatible: "zmk,behavior-trackball-dpi"
+
+properties:
+  label:
+    type: string
+    required: false
+    deprecated: true
+  sensor:
+    type: phandle
+    required: true
+    description: Phandle to the pointing sensor whose CPI should be adjusted.
+  steps:
+    type: array
+    required: true
+    description: >
+      Ordered list of CPI/DPI values that can be selected. Each entry must be a positive integer.
+  default-step-index:
+    type: int
+    default: 0
+    description: >
+      Zero-based index into the `steps` array that determines which DPI is selected at boot.
+      Values outside the valid range are clamped automatically.
+  wrap:
+    type: boolean
+    description: >
+      When present, increment/decrement commands wrap around instead of clamping to the edges.
+  sensor-attr:
+    type: int
+    default: 0
+    description: >
+      Sensor attribute passed to sensor_attr_set(). The default matches PMW3610's CPI attribute.
+  apply-default-on-init:
+    type: boolean
+    description: >
+      Force the default DPI to be sent to the sensor during boot. If omitted, the behavior
+      simply tracks changes without performing an explicit write on startup.
+
+  "#binding-cells":
+    const: 2
+    description: >
+      Binding arguments: <command value>. See `dt-bindings/zmk/trackball_dpi.h` for the
+      allowed command constants. The meaning of the value depends on the command.

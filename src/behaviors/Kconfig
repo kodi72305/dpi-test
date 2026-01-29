@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+
+config ZMK_BEHAVIOR_TRACKBALL_DPI
+	bool "Trackball DPI behavior"
+	default y
+	help
+	  Enables a behavior that can change the CPI/DPI of a pointing sensor,
+	  typically a trackball. Disable this only if you do not reference the
+	  behavior from your keymap.

@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: MIT */
+
+#pragma once
+
+#define ZMK_TRACKBALL_DPI_CMD_STEP_UP 0
+#define ZMK_TRACKBALL_DPI_CMD_STEP_DOWN 1
+#define ZMK_TRACKBALL_DPI_CMD_SET_INDEX 2
+#define ZMK_TRACKBALL_DPI_CMD_RESET 3
