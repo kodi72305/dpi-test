@@ -7,6 +7,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/sys/util.h>
+#include <zephyr/sys_clock.h>
 
 #include <drivers/behavior.h>
 #include <zmk/behavior.h>
@@ -31,6 +32,8 @@ struct behavior_trackball_dpi_data {
     bool current_valid;
 };
 
+static inline uint64_t timestamp_us(void) { return k_ticks_to_us_floor64(k_uptime_ticks()); }
+
 static int apply_cpi_index(const struct device *dev, const struct behavior_trackball_dpi_config *cfg,
                            struct behavior_trackball_dpi_data *data, uint8_t index) {
     if (index >= cfg->steps_len) {
@@ -50,7 +53,8 @@ static int apply_cpi_index(const struct device *dev, const struct behavior_track
 
     data->current_index = index;
     data->current_valid = true;
-    LOG_INF("Trackball %s CPI set to %u (index %u)", cfg->sensor->name, cfg->steps[index], index);
+    LOG_INF("Trackball %s CPI set to %u (index %u) @ %lluus", cfg->sensor->name, cfg->steps[index],
+            index, (unsigned long long)timestamp_us());
     return 0;
 }
 
