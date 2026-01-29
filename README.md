@@ -7,10 +7,12 @@
 
 ## Trackball DPI controls
 
-- Hold the support layer and use the three keys around the scroll controls to manage DPI:
-  - the key immediately after the left/right clicks resets DPI to the default for that half,
-  - the next key decreases DPI,
-  - the key before `studio_unlock` increases DPI.
-- The right firmware targets the central trackball with the following steps: 200, 400, 600, 800, 1200 DPI (default 400).
-- The left firmware targets the peripheral trackball with steps: 200, 300, 400, 500 DPI (default 200).
-- You can customize the available steps or wrapping behaviour inside `config/crosses (1).keymap`.
+- Зажмите слой support (моментарный `&lt 1 ENTER`) и используйте клавиши в рядку трекбольных кнопок:
+  1. Самая левая — выводит текущий CPI в лог (`Current Trackball …`).
+  2. Следующая через один — большой шаг «−» (перескакивает через один пресет).
+  3. После `LCLK/RCLK` идёт сброс на значение по умолчанию.
+  4. Далее малый шаг «−», колёсико вниз, колёсико вверх, малый шаг «+».
+  5. Перед `studio_unlock` стоит большой шаг «+» (тоже перескакивает через один пресет).
+- Центральный трекбол (правая половина) теперь имеет четыре режима: 300 → 600 → 900 → 1200 CPI (по умолчанию 600).
+- Левый трекбол использует 200 → 400 → 600 → 800 CPI (по умолчанию 400).
+- Все значения и назначение клавиш можно менять прямо в `config/crosses.keymap` (секция `behaviors` и слой `support_layuer`).

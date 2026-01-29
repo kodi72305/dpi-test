@@ -34,6 +34,12 @@ struct behavior_trackball_dpi_data {
 
 static inline uint64_t timestamp_us(void) { return k_ticks_to_us_floor64(k_uptime_ticks()); }
 
+static void log_cpi_state(const struct behavior_trackball_dpi_config *cfg, uint8_t index,
+                          const char *prefix) {
+    LOG_INF("%sTrackball %s CPI %u (index %u) @ %lluus", prefix, cfg->sensor->name,
+            cfg->steps[index], index, (unsigned long long)timestamp_us());
+}
+
 static int apply_cpi_index(const struct device *dev, const struct behavior_trackball_dpi_config *cfg,
                            struct behavior_trackball_dpi_data *data, uint8_t index) {
     if (index >= cfg->steps_len) {
@@ -53,8 +59,7 @@ static int apply_cpi_index(const struct device *dev, const struct behavior_track
 
     data->current_index = index;
     data->current_valid = true;
-    LOG_INF("Trackball %s CPI set to %u (index %u) @ %lluus", cfg->sensor->name, cfg->steps[index],
-            index, (unsigned long long)timestamp_us());
+    log_cpi_state(cfg, index, "");
     return 0;
 }
 
@@ -121,6 +126,10 @@ static int behavior_trackball_dpi_press(struct zmk_behavior_binding *binding,
         break;
     case ZMK_TRACKBALL_DPI_CMD_RESET:
         target_index = cfg->default_index;
+        break;
+    case ZMK_TRACKBALL_DPI_CMD_REPORT:
+        target_index = active_index;
+        log_cpi_state(cfg, target_index, "Current ");
         break;
     default:
         LOG_ERR("Unsupported DPI command %u", command);

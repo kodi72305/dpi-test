@@ -9,25 +9,40 @@
 #define TB_DPI_DEC_BINDING TB_DPI_BEHAVIOR
 #define TB_DPI_INC_BINDING TB_DPI_BEHAVIOR
 #define TB_DPI_RESET_BINDING TB_DPI_BEHAVIOR
+#define TB_DPI_BIG_DEC_BINDING TB_DPI_BEHAVIOR
+#define TB_DPI_BIG_INC_BINDING TB_DPI_BEHAVIOR
+#define TB_DPI_REPORT_BINDING TB_DPI_BEHAVIOR
 
 #if defined(CONFIG_SHIELD_CROSSES_RIGHT)
 #undef TB_DPI_BEHAVIOR
 #undef TB_DPI_DEC_BINDING
 #undef TB_DPI_INC_BINDING
 #undef TB_DPI_RESET_BINDING
+#undef TB_DPI_BIG_DEC_BINDING
+#undef TB_DPI_BIG_INC_BINDING
+#undef TB_DPI_REPORT_BINDING
 #define TB_DPI_BEHAVIOR &trackball_central_dpi
 #define TB_DPI_DEC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_DOWN 1
 #define TB_DPI_INC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_UP 1
 #define TB_DPI_RESET_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_RESET 0
+#define TB_DPI_BIG_DEC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_DOWN 2
+#define TB_DPI_BIG_INC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_UP 2
+#define TB_DPI_REPORT_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_REPORT 0
 #elif defined(CONFIG_SHIELD_CROSSES_LEFT)
 #undef TB_DPI_BEHAVIOR
 #undef TB_DPI_DEC_BINDING
 #undef TB_DPI_INC_BINDING
 #undef TB_DPI_RESET_BINDING
+#undef TB_DPI_BIG_DEC_BINDING
+#undef TB_DPI_BIG_INC_BINDING
+#undef TB_DPI_REPORT_BINDING
 #define TB_DPI_BEHAVIOR &trackball_peripheral_dpi
 #define TB_DPI_DEC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_DOWN 1
 #define TB_DPI_INC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_UP 1
 #define TB_DPI_RESET_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_RESET 0
+#define TB_DPI_BIG_DEC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_DOWN 2
+#define TB_DPI_BIG_INC_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_STEP_UP 2
+#define TB_DPI_REPORT_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_REPORT 0
 #endif
 
     chosen {
@@ -85,7 +100,7 @@
             label = "TB_CENTRAL_DPI";
             #binding-cells = <2>;
             sensor = <&trackball_central>;
-            steps = <200 400 600 800 1200>;
+            steps = <300 600 900 1200>;
             default-step-index = <1>;
             wrap;
         };
@@ -97,8 +112,8 @@
             label = "TB_PERIPHERAL_DPI";
             #binding-cells = <2>;
             sensor = <&trackball_peripheral>;
-            steps = <200 300 400 500>;
-            default-step-index = <0>;
+            steps = <200 400 600 800>;
+            default-step-index = <1>;
             wrap;
         };
 #endif
@@ -176,7 +191,7 @@
 &trans  &kp N1  &trans  &trans     &trans     &trans  &trans          &trans          &trans        &trans     &trans            &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp HOME   &kp DELETE        &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans  &trans  &trans  &mkp LCLK  &mkp RCLK  TB_DPI_RESET_BINDING  TB_DPI_DEC_BINDING  &msc SCRL_DOWN  &msc SCRL_UP  TB_DPI_INC_BINDING  &trans            &studio_unlock
+TB_DPI_REPORT_BINDING  &trans  TB_DPI_BIG_DEC_BINDING  &mkp LCLK  &mkp RCLK  TB_DPI_RESET_BINDING  TB_DPI_DEC_BINDING  &msc SCRL_DOWN  &msc SCRL_UP  TB_DPI_INC_BINDING  TB_DPI_BIG_INC_BINDING  &studio_unlock
                         &trans     &trans     &trans  &kp LG(SPACE)   &trans          &trans
             >;
         };
