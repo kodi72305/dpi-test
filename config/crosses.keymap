@@ -32,8 +32,8 @@
 
     chosen {
         zmk,physical-layout = &gggw_crosses_54_layout;
-        zephyr,console = &cdc_acm_uart;
-        zephyr,shell-uart = &cdc_acm_uart;
+        zephyr,console = &usb_log_uart;
+        zephyr,shell-uart = &usb_log_uart;
     };
 
     behaviors {
@@ -230,5 +230,11 @@
                         &trans  &trans  &trans  &trans  &trans    &trans
             >;
         };
+    };
+};
+
+&zephyr_udc0 {
+    usb_log_uart: usb_log_uart {
+        compatible = "zephyr,cdc-acm-uart";
     };
 };
