@@ -30,7 +30,11 @@
 #define TB_DPI_RESET_BINDING TB_DPI_BEHAVIOR ZMK_TRACKBALL_DPI_CMD_RESET 0
 #endif
 
-    chosen { zmk,physical-layout = &gggw_crosses_54_layout; };
+    chosen {
+        zmk,physical-layout = &gggw_crosses_54_layout;
+        zephyr,console = &cdc_acm_uart;
+        zephyr,shell-uart = &cdc_acm_uart;
+    };
 
     behaviors {
         space_layer_shent: space_layer_shent {
