@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/Good-Great-Grand-Wonderful
     - name: lanyagagaga-droid
       url-base: https://github.com/lanyagagaga-droid
+    - name: englmaxi
+      url-base: https://github.com/englmaxi
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -16,5 +18,8 @@ manifest:
       remote: lanyagagaga-droid
       revision: main
       import: config/west.yml
+    - name: zmk-hid-trackball-interface
+      remote: englmaxi
+      revision: main
   self:
     path: config
